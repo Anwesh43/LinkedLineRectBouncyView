@@ -191,4 +191,26 @@ class LineRectBouncyView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : LineRectBouncyView) {
+
+        private val animator : Animator = Animator(view)
+        private val lbr : LineBouncyRect = LineBouncyRect(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            lbr.draw(canvas, paint)
+            animator.animate {
+                lbr.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            lbr.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
