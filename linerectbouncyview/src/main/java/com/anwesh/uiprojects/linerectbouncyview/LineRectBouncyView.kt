@@ -214,4 +214,13 @@ class LineRectBouncyView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : LineRectBouncyView {
+            val view : LineRectBouncyView = LineRectBouncyView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
